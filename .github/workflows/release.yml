@@ -1,0 +1,39 @@
+# Publishes a GitHub release with typewave.exe attached.
+# Actions → Release → Run workflow, enter the version (it creates the v<version> tag).
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release, without the v (e.g. 0.1.0)"
+        required: true
+        default: "0.1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S . -B build -A x64
+      - run: cmake --build build --config Release
+      - run: ctest --test-dir build -C Release --output-on-failure
+      - name: Publish the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          cat > notes.md <<'NOTES'
+          ## Install
+
+          1. Download **typewave.exe** under Assets below.
+          2. Double-click it. No installer and nothing else to install.
+          3. If Windows SmartScreen warns about an unknown app: **More info → Run anyway** (the app is not code-signed).
+
+          It never records what you type. See the [README](https://github.com/${{ github.repository }}#readme).
+          NOTES
+          gh release create "v$VERSION" --target "$GITHUB_SHA" build/Release/typewave.exe --title "typewave v$VERSION" --notes-file notes.md

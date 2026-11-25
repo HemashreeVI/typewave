@@ -23,6 +23,10 @@ Realistic switch sounds for every key, made live in code: no sound files, no lag
 
 ---
 
+<p align="center"><a href="https://github.com/HemashreeVI/typewave/releases/latest"><img src="https://img.shields.io/badge/%E2%AC%87_Download-typewave.exe_(Windows)-2ea44f?style=for-the-badge&logo=windows&logoColor=white" alt="%E2%AC%87 Download-typewave.exe (Windows)"></a></p>
+
+> **Install in 10 seconds:** download `typewave.exe` from the [latest release](https://github.com/HemashreeVI/typewave/releases/latest) and double-click it. No installer. (If SmartScreen warns about an unknown app: **More info → Run anyway**.)
+
 ## ✨ What it does
 
 | | |
